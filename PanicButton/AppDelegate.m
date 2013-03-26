@@ -1,18 +1,56 @@
+
 //
-//  AppDelegate.m
+//  AppController.m
 //  PanicButton
 //
-//  Created by Tim Jarratt on 3/22/13.
-//  Copyright (c) 2013 Tim Jarratt. All rights reserved.
+//  Created by Tim Jarratt in the future.
+//  Copyright 2012 General Linear Group. All rights reserved.
 //
 
 #import "AppDelegate.h"
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+@synthesize menu;
+
+- (void)awakeFromNib
 {
-    // Insert code here to initialize your application
+    [NSApp activateIgnoringOtherApps:YES];
+    
+    // Create an NSStatusItem.
+    float width = 50.0;
+    float height = [[NSStatusBar systemStatusBar] thickness];
+    NSRect viewFrame = NSMakeRect(0, 0, width, height);
+    statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:width] retain];
+    [statusItem setView:[[[CustomView alloc] initWithFrame:viewFrame controller:self] autorelease]];
+    [statusItem setTitle:@"¡Panic!"];
 }
+
+- (void)dealloc
+{
+    [[NSStatusBar systemStatusBar] removeStatusItem:statusItem];
+    [super dealloc];
+}
+
+
+- (void)toggleAttachedWindowAtPoint:(NSPoint)pt
+{
+    // Attach/detach window.
+    if (!attachedWindow) {
+        attachedWindow = [[MAAttachedWindow alloc] initWithView:view
+                                                attachedToPoint:pt
+                                                       inWindow:nil
+                                                         onSide:MAPositionBottom
+                                                     atDistance:5.0];
+        [textField setTextColor:[attachedWindow textColor]];
+        [textField setStringValue:@"Your text goes here..."];
+        [attachedWindow makeKeyAndOrderFront:self];
+    } else {
+        [attachedWindow orderOut:self];
+        [attachedWindow release];
+        attachedWindow = nil;
+    }
+}
+
 
 @end

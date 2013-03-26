@@ -13,6 +13,8 @@
 		F7F2B95E16FD58B100800DA5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F7F2B95C16FD58B100800DA5 /* Credits.rtf */; };
 		F7F2B96116FD58B100800DA5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F2B96016FD58B100800DA5 /* AppDelegate.m */; };
 		F7F2B96416FD58B100800DA5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F2B96216FD58B100800DA5 /* MainMenu.xib */; };
+		F7F2B96C16FD598F00800DA5 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F2B96B16FD598F00800DA5 /* CustomView.m */; };
+		F7F2B96F16FD59F900800DA5 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F2B96E16FD59F900800DA5 /* MAAttachedWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,10 @@
 		F7F2B95F16FD58B100800DA5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F7F2B96016FD58B100800DA5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F7F2B96316FD58B100800DA5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F7F2B96A16FD598F00800DA5 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		F7F2B96B16FD598F00800DA5 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
+		F7F2B96D16FD59F900800DA5 /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAttachedWindow.h; path = ../MAAttachedWindow.h; sourceTree = "<group>"; };
+		F7F2B96E16FD59F900800DA5 /* MAAttachedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAttachedWindow.m; path = ../MAAttachedWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,10 @@
 			children = (
 				F7F2B95F16FD58B100800DA5 /* AppDelegate.h */,
 				F7F2B96016FD58B100800DA5 /* AppDelegate.m */,
+				F7F2B96A16FD598F00800DA5 /* CustomView.h */,
+				F7F2B96B16FD598F00800DA5 /* CustomView.m */,
+				F7F2B96D16FD59F900800DA5 /* MAAttachedWindow.h */,
+				F7F2B96E16FD59F900800DA5 /* MAAttachedWindow.m */,
 				F7F2B96216FD58B100800DA5 /* MainMenu.xib */,
 				F7F2B95416FD58B100800DA5 /* Supporting Files */,
 			);
@@ -168,6 +178,8 @@
 			files = (
 				F7F2B95A16FD58B100800DA5 /* main.m in Sources */,
 				F7F2B96116FD58B100800DA5 /* AppDelegate.m in Sources */,
+				F7F2B96C16FD598F00800DA5 /* CustomView.m in Sources */,
+				F7F2B96F16FD59F900800DA5 /* MAAttachedWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +275,7 @@
 		F7F2B96816FD58B100800DA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PanicButton/PanicButton-Prefix.pch";
@@ -275,6 +288,7 @@
 		F7F2B96916FD58B100800DA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PanicButton/PanicButton-Prefix.pch";
