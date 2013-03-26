@@ -11,7 +11,7 @@
 #import "MAAttachedWindow.h"
 
 @class MAAttachedWindow;
-@interface AppDelegate : NSObject {
+@interface AppDelegate : NSObject <NSWindowDelegate> {
     NSStatusItem *statusItem;
     MAAttachedWindow *attachedWindow;
     

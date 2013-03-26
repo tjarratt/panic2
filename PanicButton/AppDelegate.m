@@ -45,6 +45,8 @@
         [textField setTextColor:[attachedWindow textColor]];
         [textField setStringValue:@"Your text goes here..."];
         [attachedWindow makeKeyAndOrderFront:self];
+        [NSApp activateIgnoringOtherApps:YES];
+
     } else {
         [attachedWindow orderOut:self];
         [attachedWindow release];
