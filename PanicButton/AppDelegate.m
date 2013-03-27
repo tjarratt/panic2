@@ -20,7 +20,7 @@
     NSMenu *menu = [[NSMenu alloc] init];
 
     NSMenuItem *actions_item = [[NSMenuItem alloc] initWithTitle:@"Actions" action:nil keyEquivalent:@""];
-    NSMenuItem *quit_item = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quit_application:) keyEquivalent:@""];
+    NSMenuItem *quit_item = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quit_application) keyEquivalent:@""];
     
     NSMenuItem *open_door_item = [[NSMenuItem alloc] initWithTitle:@"Open Doors" action:@selector(open_doors) keyEquivalent:@""];
     NSMenuItem *nateberg_item = [[NSMenuItem alloc] initWithTitle:@"Nateberg-Berg" action:@selector(nateberg_berg) keyEquivalent:@""];
@@ -56,23 +56,24 @@
 
 #pragma mark - menu actions
 - (void) open_doors {
-    printf("open all them doors\n");
+    NSLog(@"open all them doors");
 }
 
 - (void) nateberg_berg {
-    printf("BERG IT\n");
+    NSLog(@"BERG IT");
 }
 
 - (void) random_string {
-    printf("rand-um string\n");
+    NSLog(@"rand-um string");
 }
 
 - (void) play_barbaric {
-    printf("bar-barrrrric\n");
+    NSLog(@"bar-barrrrric");
 }
 
 - (void) quit_application {
-    printf("quit!\n");
+    NSLog(@"Quit!");
+    exit(0);
 }
 
 @end
