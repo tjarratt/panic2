@@ -59,14 +59,6 @@
     msgRect.origin.y = ([self frame].size.height - msgSize.height) / 2.0;
     
     [text drawInRect:msgRect withAttributes:msgAttrs];
-
-    // seems like the right thing to do, but hides our view? wtf
-//    NSMenu *menu = [[NSApp delegate] menu];
-//    NSMenuItem *menuItem = [[NSMenuItem alloc] init];
-//    [menuItem setTitle:@"DAAAAAAMN"];
-//    [menu addItem:menuItem];
-//    
-//    [self setMenu:menu];
 }
 
 - (void)MouseDown:(NSEvent *)event

@@ -7,21 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CustomView.h"
-#import "MAAttachedWindow.h"
 
 @class MAAttachedWindow;
 @interface AppDelegate : NSObject <NSWindowDelegate> {
     NSStatusItem *statusItem;
-    MAAttachedWindow *attachedWindow;
-    
-    IBOutlet NSView *view;
-    IBOutlet NSTextField *textField;
-    IBOutlet NSMenu *menu;
 }
-
-@property NSMenu* menu;
-
-- (void)toggleAttachedWindowAtPoint:(NSPoint)pt;
 
 @end
