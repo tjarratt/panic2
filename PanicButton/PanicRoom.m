@@ -88,7 +88,7 @@
     CFRelease(dict);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        IOHIDManagerRegisterDeviceMatchingCallback(manager, deviceMatchingCallback, NULL);
+        IOHIDManagerRegisterDeviceMatchingCallback(manager, deviceMatchingCallback, (void *)self);
         IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
         IOReturn ret = IOHIDManagerOpen(manager, kIOHIDOptionsTypeNone);
         if (ret == kIOReturnSuccess) {
@@ -127,22 +127,35 @@ static void deviceRemovedCallback(void *context, IOReturn result, void *sender) 
 }
 
 static void deviceMatchingCallback(void *context, IOReturn result, void *sender, IOHIDDeviceRef device) {
-    NSLog(@"device matching callback: %p", device);
-    PanicButton *button = [[PanicButton alloc] init];
-    button.device = device;
-    button.volume = [[VolumeKnob alloc] init];
+    PanicRoom *const this_class = (PanicRoom *const) context;
+    [this_class handle_matching_device:device sender:sender result:result];
+}
+
+- (void) handle_matching_device:(IOHIDDeviceRef)device sender:(void *)sender result:(IOReturn)result {
+    if (panic_button != nil) {
+        NSLog(@"release the hounds!");
+        [panic_button release];
+    }
     
+    panic_button = [[PanicButton alloc] init];
+    panic_button.device = device;
+    panic_button.volume = [[VolumeKnob alloc] init];
+
     CFRunLoopTimerContext ctx;
     bzero(&ctx, sizeof(ctx));
-    ctx.info = (void *) CFRetain(button);
+    ctx.info = (void *) CFRetain(panic_button);
     CFRunLoopTimerRef timer = CFRunLoopTimerCreate(kCFAllocatorDefault, 0, 0.1, 0, 0, timerCallback, &ctx);
     
     if (timer) {
+        NSLog(@"setting up a runloop timer for device");
         CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
         IOHIDDeviceRegisterRemovalCallback(device, deviceRemovedCallback, timer);
         CFRelease(timer);
     }
-    
+    else {
+        NSLog(@"Could not initialize a CFTimer for a matching device.");
+        exit(1);
+    }
 }
 
 - (void) quit_application {

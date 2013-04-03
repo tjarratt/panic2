@@ -21,6 +21,7 @@
 
 @interface PanicRoom : NSObject {
     NSStatusItem *statusItem;
+    PanicButton *panic_button;
 }
 
 - (void) startup;
