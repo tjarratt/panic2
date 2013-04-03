@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PanicRoom.h"
 
-@interface AppDelegate : NSObject <NSWindowDelegate>
-
+@interface AppDelegate : NSObject <NSWindowDelegate>  {
+    PanicRoom *room;
+}
 @end

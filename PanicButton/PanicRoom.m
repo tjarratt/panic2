@@ -13,7 +13,8 @@
 #pragma mark - Lifecycle
 - (void) startup {
     [self create_status_bar];
-    [self start_runloop];
+    action = @selector(do_open_doors);
+    [NSThread detachNewThreadSelector:@selector(start_runloop) toTarget:self withObject:nil];
 }
 
 - (void) dealloc {
@@ -31,13 +32,18 @@
     
     NSMenuItem *actions_item = [[NSMenuItem alloc] initWithTitle:@"Actions" action:nil keyEquivalent:@""];
     NSMenuItem *quit_item = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quit_application) keyEquivalent:@""];
-    
     NSMenuItem *open_door_item = [[NSMenuItem alloc] initWithTitle:@"Open Doors" action:@selector(open_doors) keyEquivalent:@""];
     NSMenuItem *nateberg_item = [[NSMenuItem alloc] initWithTitle:@"Nateberg-Berg" action:@selector(nateberg_berg) keyEquivalent:@""];
     NSMenuItem *speak_random_string_item = [[NSMenuItem alloc] initWithTitle:@"Random String" action:@selector(random_string) keyEquivalent:@""];
     NSMenuItem *play_sound_item = [[NSMenuItem alloc] initWithTitle:@"Play Sound" action:nil keyEquivalent:@""];
-    
     NSMenuItem *barbaric_sound = [[NSMenuItem alloc] initWithTitle:@"Barbaric" action:@selector(play_barbaric) keyEquivalent:@""];
+    
+    [quit_item setTarget:self];
+    [open_door_item setTarget:self];
+    [nateberg_item setTarget:self];
+    [speak_random_string_item setTarget:self];
+    [barbaric_sound setTarget:self];
+    
     NSMenu *sounds_submenu = [[NSMenu alloc] init];
     [sounds_submenu addItem: barbaric_sound];
     [play_sound_item setSubmenu:sounds_submenu];
@@ -64,12 +70,13 @@
     IOHIDManagerRef manager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
     if (!CFGetTypeID(manager) == IOHIDManagerGetTypeID()) {
         NSLog(@"couldn't get a IO HID manager ref");
-        return;
+        exit(1);
     }
     
     CFMutableDictionaryRef dict = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
     if (!dict) {
-        return NSLog(@"Couldn't create device dict");
+        NSLog(@"Couldn't create device dict");
+        exit(1);
     }
     
     int vendorID = vendor_id;
@@ -103,16 +110,23 @@
 
 #pragma mark - Device Usage
 static void timerCallback(CFRunLoopTimerRef timer, void *info) {
-    PanicButton *button = (PanicButton *) info;
-    if ([button was_pushed]) {
+    PanicRoom *room = (PanicRoom *) info;
+    [room timer_callback];
+}
+
+- (void) timer_callback {
+    if ([panic_button was_pushed]) {
         NSLog(@"¿SUCCESS!");
-        [button handle_action];
+        [self handle_current_action];
     }
+}
+
+- (void) handle_current_action {
+    [self performSelector:action];
 }
 
 #pragma mark - Device Lifecycle
 static void deviceRemovedCallback(void *context, IOReturn result, void *sender) {
-    NSLog(@"device removed callback");
     CFRunLoopTimerRef timer = (CFRunLoopTimerRef)context;
     if (timer && CFGetTypeID(timer) == CFRunLoopTimerGetTypeID()) {
         CFRunLoopTimerContext ctx;
@@ -133,7 +147,6 @@ static void deviceMatchingCallback(void *context, IOReturn result, void *sender,
 
 - (void) handle_matching_device:(IOHIDDeviceRef)device sender:(void *)sender result:(IOReturn)result {
     if (panic_button != nil) {
-        NSLog(@"release the hounds!");
         [panic_button release];
     }
     
@@ -143,11 +156,10 @@ static void deviceMatchingCallback(void *context, IOReturn result, void *sender,
 
     CFRunLoopTimerContext ctx;
     bzero(&ctx, sizeof(ctx));
-    ctx.info = (void *) CFRetain(panic_button);
+    ctx.info = (void *) CFRetain(self);
     CFRunLoopTimerRef timer = CFRunLoopTimerCreate(kCFAllocatorDefault, 0, 0.1, 0, 0, timerCallback, &ctx);
     
     if (timer) {
-        NSLog(@"setting up a runloop timer for device");
         CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
         IOHIDDeviceRegisterRemovalCallback(device, deviceRemovedCallback, timer);
         CFRelease(timer);
@@ -158,9 +170,43 @@ static void deviceMatchingCallback(void *context, IOReturn result, void *sender,
     }
 }
 
+#pragma mark - Menu actions
 - (void) quit_application {
     NSLog(@"Quit!");
     exit(0);
+}
+
+- (void) open_doors {
+    action = @selector(do_open_doors);
+}
+
+- (void) nateberg_berg {
+    action = @selector(do_nateberg_berg);
+}
+
+- (void) random_string {
+    action = @selector(do_random_string);
+}
+
+- (void) play_barbaric {
+    action = @selector(do_play_barbaric);
+}
+
+#pragma mark - Menu Action implementations
+- (void) do_open_doors {
+    NSLog(@"I'm sorry Tim, I can't open those doors");
+}
+
+- (void) do_nateberg_berg {
+    NSLog(@"I'm sorry, I don't know how to berg that");
+}
+
+- (void) do_random_string {
+    NSLog(@"Sorry, I don't know any random strings");
+}
+
+- (void) do_play_barbaric {
+    NSLog(@"BAR__BARRRRIC");
 }
 
 @end

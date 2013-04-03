@@ -21,12 +21,11 @@
 }
 
 - (void)find_default_device {
-    // AudioHardwareGetProperty is deprecated, use AudioObjectGetPropertyData
+    // TODO: AudioHardwareGetProperty is deprecated, use AudioObjectGetPropertyData
     AudioDeviceID device;
     UInt32 size = sizeof(AudioDeviceID);
     AudioHardwareGetProperty(kAudioHardwarePropertyDefaultOutputDevice, &size, &device);
     
-    NSLog(@"found an output device: %u\n", device);
     default_device = device;
 }
 

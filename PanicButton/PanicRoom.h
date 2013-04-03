@@ -22,11 +22,24 @@
 @interface PanicRoom : NSObject {
     NSStatusItem *statusItem;
     PanicButton *panic_button;
+    SEL action;
 }
 
 - (void) startup;
 - (void) create_status_bar;
 - (void) start_runloop;
+
+// menu actions
 - (void) quit_application;
+- (void) open_doors;
+- (void) nateberg_berg;
+- (void) random_string;
+- (void) play_barbaric;
+
+// actual implementations
+- (void) do_open_doors;
+- (void) do_nateberg_berg;
+- (void) do_random_string;
+- (void) do_play_barbaric;
 
 @end

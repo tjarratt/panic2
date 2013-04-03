@@ -12,9 +12,8 @@
 @implementation AppDelegate
 
 #pragma mark - lifecycle
-- (void)awakeFromNib {
-    [NSApp activateIgnoringOtherApps:YES];
-    PanicRoom *room = [[PanicRoom alloc] init];
+- (void)awakeFromNib {    
+    room = [[PanicRoom alloc] init];
     [room startup];
 }
 

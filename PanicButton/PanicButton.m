@@ -40,10 +40,6 @@
     return NO;
 }
 
--(void) handle_action {
-    NSLog(@"Doin the needful...");
-}
-
 # pragma mark Delegate methods
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)synth didFinishSpeaking:(BOOL)finishedSpeaking {
     NSLog(@"returning volume to original level.\n");
