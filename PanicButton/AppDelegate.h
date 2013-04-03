@@ -7,10 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PanicRoom.h"
 
-@class MAAttachedWindow;
-@interface AppDelegate : NSObject <NSWindowDelegate> {
-    NSStatusItem *statusItem;
-}
+@interface AppDelegate : NSObject <NSWindowDelegate>
 
 @end

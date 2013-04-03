@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F71988AB1702AE1B007008C5 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F71988AA1702AE1B007008C5 /* MenuView.m */; };
+		F75A97FB1708048900B8F330 /* PanicRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A97FA1708048900B8F330 /* PanicRoom.m */; };
+		F75A97FE1708058600B8F330 /* PanicButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A97FD1708058600B8F330 /* PanicButton.m */; };
+		F75A9801170805BA00B8F330 /* VolumeKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = F75A9800170805BA00B8F330 /* VolumeKnob.m */; };
+		F75A98031708C37C00B8F330 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75A98021708C37C00B8F330 /* IOKit.framework */; };
+		F75A98051708C38800B8F330 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75A98041708C38800B8F330 /* CoreAudio.framework */; };
 		F7F2B94E16FD58B100800DA5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F2B94D16FD58B100800DA5 /* Cocoa.framework */; };
 		F7F2B95816FD58B100800DA5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7F2B95616FD58B100800DA5 /* InfoPlist.strings */; };
 		F7F2B95A16FD58B100800DA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F2B95916FD58B100800DA5 /* main.m */; };
@@ -17,8 +21,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F71988A91702AE1B007008C5 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
-		F71988AA1702AE1B007008C5 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		F75A97F91708048900B8F330 /* PanicRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanicRoom.h; sourceTree = "<group>"; };
+		F75A97FA1708048900B8F330 /* PanicRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanicRoom.m; sourceTree = "<group>"; };
+		F75A97FC1708058600B8F330 /* PanicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanicButton.h; sourceTree = "<group>"; };
+		F75A97FD1708058600B8F330 /* PanicButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanicButton.m; sourceTree = "<group>"; };
+		F75A97FF170805BA00B8F330 /* VolumeKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeKnob.h; sourceTree = "<group>"; };
+		F75A9800170805BA00B8F330 /* VolumeKnob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeKnob.m; sourceTree = "<group>"; };
+		F75A98021708C37C00B8F330 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		F75A98041708C38800B8F330 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		F7F2B94A16FD58B100800DA5 /* PanicButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanicButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F2B94D16FD58B100800DA5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F7F2B95016FD58B100800DA5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -39,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F75A98051708C38800B8F330 /* CoreAudio.framework in Frameworks */,
+				F75A98031708C37C00B8F330 /* IOKit.framework in Frameworks */,
 				F7F2B94E16FD58B100800DA5 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +78,8 @@
 		F7F2B94C16FD58B100800DA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F75A98041708C38800B8F330 /* CoreAudio.framework */,
+				F75A98021708C37C00B8F330 /* IOKit.framework */,
 				F7F2B94D16FD58B100800DA5 /* Cocoa.framework */,
 				F7F2B94F16FD58B100800DA5 /* Other Frameworks */,
 			);
@@ -89,8 +103,12 @@
 				F7F2B96016FD58B100800DA5 /* AppDelegate.m */,
 				F7F2B96216FD58B100800DA5 /* MainMenu.xib */,
 				F7F2B95416FD58B100800DA5 /* Supporting Files */,
-				F71988A91702AE1B007008C5 /* MenuView.h */,
-				F71988AA1702AE1B007008C5 /* MenuView.m */,
+				F75A97F91708048900B8F330 /* PanicRoom.h */,
+				F75A97FA1708048900B8F330 /* PanicRoom.m */,
+				F75A97FC1708058600B8F330 /* PanicButton.h */,
+				F75A97FD1708058600B8F330 /* PanicButton.m */,
+				F75A97FF170805BA00B8F330 /* VolumeKnob.h */,
+				F75A9800170805BA00B8F330 /* VolumeKnob.m */,
 			);
 			path = PanicButton;
 			sourceTree = "<group>";
@@ -173,7 +191,9 @@
 			files = (
 				F7F2B95A16FD58B100800DA5 /* main.m in Sources */,
 				F7F2B96116FD58B100800DA5 /* AppDelegate.m in Sources */,
-				F71988AB1702AE1B007008C5 /* MenuView.m in Sources */,
+				F75A97FB1708048900B8F330 /* PanicRoom.m in Sources */,
+				F75A97FE1708058600B8F330 /* PanicButton.m in Sources */,
+				F75A9801170805BA00B8F330 /* VolumeKnob.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +254,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -261,7 +281,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;
