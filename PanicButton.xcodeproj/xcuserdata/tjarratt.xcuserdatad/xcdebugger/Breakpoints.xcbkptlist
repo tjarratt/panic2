@@ -34,7 +34,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PanicButton/PanicRoom.m"
-         timestampString = "386659274.215845"
+         timestampString = "386746246.698173"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "114"
@@ -47,7 +47,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PanicButton/PanicRoom.m"
-         timestampString = "386659274.215845"
+         timestampString = "386746267.450307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "130"
@@ -60,20 +60,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PanicButton/PanicRoom.m"
-         timestampString = "386659274.215845"
+         timestampString = "386746267.450307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "143"
          endingLineNumber = "143"
-         landmarkName = "@implementation PanicRoom"
-         landmarkType = "3">
+         landmarkName = "deviceMatchingCallback()"
+         landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PanicButton/PanicRoom.m"
-         timestampString = "386659274.215845"
+         timestampString = "386746267.450307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "149"
@@ -99,7 +99,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PanicButton/PanicRoom.m"
-         timestampString = "386659274.215845"
+         timestampString = "386746267.450307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "119"
@@ -112,12 +112,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PanicButton/PanicRoom.m"
-         timestampString = "386659274.215845"
+         timestampString = "386746267.450307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "118"
          endingLineNumber = "118"
          landmarkName = "-timer_callback"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PanicButton/PanicRoom.m"
+         timestampString = "386746267.450307"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "208"
+         endingLineNumber = "208"
+         landmarkName = "-do_open_doors"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PanicButton/PanicRoom.m"
+         timestampString = "386746267.450307"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "202"
+         endingLineNumber = "202"
+         landmarkName = "-do_open_doors"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PanicButton/PanicRoom.m"
+         timestampString = "386746267.450307"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "-do_open_doors"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

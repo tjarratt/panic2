@@ -16,6 +16,9 @@
 #import <CoreAudio/CoreAudio.h>
 #import <CoreAudioKit/CoreAudioKit.h>
 
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
+
 # define vendor_id 0x1130;
 # define product_id 0x0202;
 

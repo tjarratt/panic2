@@ -21,6 +21,5 @@
 
 - (void) speechSynthesizer: (NSSpeechSynthesizer *)synth didFinishSpeaking:(BOOL)finishedSpeaking;
 - (BOOL) was_pushed;
-- (void) handle_action;
 
 @end

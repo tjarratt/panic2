@@ -44,11 +44,11 @@
     [speak_random_string_item setTarget:self];
     [barbaric_sound setTarget:self];
     
-    NSMenu *sounds_submenu = [[NSMenu alloc] init];
+    NSMenu *sounds_submenu = [[[NSMenu alloc] init] autorelease];
     [sounds_submenu addItem: barbaric_sound];
     [play_sound_item setSubmenu:sounds_submenu];
     
-    NSMenu *actions_menu = [[NSMenu alloc] init];
+    NSMenu *actions_menu = [[[NSMenu alloc] init] autorelease];
     [actions_menu addItem: open_door_item];
     [actions_menu addItem: nateberg_item];
     [actions_menu addItem: speak_random_string_item];
@@ -116,7 +116,6 @@ static void timerCallback(CFRunLoopTimerRef timer, void *info) {
 
 - (void) timer_callback {
     if ([panic_button was_pushed]) {
-        NSLog(@"¿SUCCESS!");
         [self handle_current_action];
     }
 }
@@ -154,10 +153,10 @@ static void deviceMatchingCallback(void *context, IOReturn result, void *sender,
     panic_button.device = device;
     panic_button.volume = [[VolumeKnob alloc] init];
 
-    CFRunLoopTimerContext ctx;
-    bzero(&ctx, sizeof(ctx));
-    ctx.info = (void *) CFRetain(self);
-    CFRunLoopTimerRef timer = CFRunLoopTimerCreate(kCFAllocatorDefault, 0, 0.1, 0, 0, timerCallback, &ctx);
+    CFRunLoopTimerContext context;
+    bzero(&context, sizeof(context));
+    context.info = (void *) CFRetain(self);
+    CFRunLoopTimerRef timer = CFRunLoopTimerCreate(kCFAllocatorDefault, 0, 0.1, 0, 0, timerCallback, &context);
     
     if (timer) {
         CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
@@ -194,11 +193,44 @@ static void deviceMatchingCallback(void *context, IOReturn result, void *sender,
 
 #pragma mark - Menu Action implementations
 - (void) do_open_doors {
-    NSLog(@"I'm sorry Tim, I can't open those doors");
+    NSLog(@"Open the pod bay doors, Hal.");
+    NSURL *auth_url = [NSURL URLWithString:@"https://door.nearbuysystems.com/auth"];
+    NSURL *door_url = [NSURL URLWithString:@"https://door.nearbuysystems.com/open"];
+    
+    NSError *error;
+    NSString *credentials = [NSString stringWithContentsOfFile:@"/etc/panic" encoding:NSUTF8StringEncoding error:&error];
+    NSArray *pieces = [[credentials stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsSeparatedByString:@":"];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:auth_url];
+    [request setPostValue:[pieces objectAtIndex:0] forKey:@"username"];
+    [request setPostValue:[pieces objectAtIndex:1] forKey:@"password"];
+    
+    [request startSynchronous];
+    NSLog(@"request: %@, code %d, body %@", [[request url] absoluteString], [request responseStatusCode], [request responseString]);
+    
+    ASIFormDataRequest *front_door = [ASIFormDataRequest requestWithURL:door_url];
+    [front_door setPostValue:@"Front Door" forKey:@"door"];
+    [front_door setDelegate:self];
+    [front_door startAsynchronous];
+    
+    ASIFormDataRequest *side_door = [ASIFormDataRequest requestWithURL:door_url];
+    [side_door setPostValue:@"Side Door" forKey:@"door"];
+    [side_door setDelegate:self];
+    [side_door startAsynchronous];
 }
 
 - (void) do_nateberg_berg {
-    NSLog(@"I'm sorry, I don't know how to berg that");
+    NSLog(@"Berging current build in storenet");
+    NSURL *nateberg = [NSURL URLWithString:@"http://nateberg-1.corp.nearbuysystems.com:8080/build"];
+    
+    NSString *ref = @"0000";
+    NSString *branch = @"storenet-master";
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:nateberg];
+    [request setRequestMethod:@"PUT"];
+    [request setPostValue:ref forKey:@"ref"];
+    [request setPostValue:branch forKey:@"name"];
+    [request setPostValue:@"git@github.com:nearbuy/storenet.git" forKey:@"repository"];
 }
 
 - (void) do_random_string {
@@ -207,6 +239,22 @@ static void deviceMatchingCallback(void *context, IOReturn result, void *sender,
 
 - (void) do_play_barbaric {
     NSLog(@"BAR__BARRRRIC");
+}
+
+#pragma mark - ASINetwork delegate methods
+- (void)requestFinished:(ASIHTTPRequest *)req {
+    NSString *url = [[req url] absoluteString];
+    
+    int statusCode = [req responseStatusCode];
+    NSString *responseBody = [req responseString];
+    NSString *statusMessage = [req responseStatusMessage];
+    NSLog(@"request: %@, got response code %d, message %@, body %@", url, statusCode, statusMessage, responseBody);
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    NSString *url = [[request url] absoluteString];
+    NSError *error = [request error];
+    NSLog(@"request %@ failed: %@", url, [error localizedDescription]);
 }
 
 @end

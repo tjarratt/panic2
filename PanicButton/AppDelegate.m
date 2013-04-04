@@ -11,7 +11,6 @@
 
 @implementation AppDelegate
 
-#pragma mark - lifecycle
 - (void)awakeFromNib {    
     room = [[PanicRoom alloc] init];
     [room startup];
